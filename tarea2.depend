@@ -1,0 +1,41 @@
+# depslib dependency file v1.0
+1567652630 source:c:\users\rollaner\desktop\universidad\tareas e.d\tarea2\list.c
+	"list.h"
+	<stdlib.h>
+	<assert.h>
+
+1567652630 c:\users\rollaner\desktop\universidad\tareas e.d\tarea2\list.h
+
+1541948956 source:c:\users\rollaner\desktop\universidad\tareas e.d\tarea2\map.c
+	"Map.h"
+	<math.h>
+	<string.h>
+	<stdlib.h>
+	<stdint.h>
+	<assert.h>
+
+1538512728 c:\users\rollaner\desktop\universidad\tareas e.d\tarea2\map.h
+
+1571188253 source:c:\users\rollaner\desktop\universidad\tareas e.d\tarea2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"musicfunctions.h"
+	"Map.h"
+	"list.h"
+
+1571188169 c:\users\rollaner\desktop\universidad\tareas e.d\tarea2\musicfunctions.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"list.h"
+	"Map.h"
+
+1571188383 source:c:\users\rollaner\desktop\universidad\tareas e.d\tarea2\musicfunctions.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"musicfunctions.h"
+	"list.h"
+	"Map.h"
+
