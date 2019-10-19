@@ -80,3 +80,44 @@
 	"list.h"
 	"Map.h"
 
+1567656230 source:c:\users\rollaner\desktop\universidad\tareas e.d\tarea_2\list.c
+	"list.h"
+	<stdlib.h>
+	<assert.h>
+
+1567656230 c:\users\rollaner\desktop\universidad\tareas e.d\tarea_2\list.h
+
+1571517259 source:c:\users\rollaner\desktop\universidad\tareas e.d\tarea_2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"musicfunctions.h"
+	"Map.h"
+	"list.h"
+
+1571252827 c:\users\rollaner\desktop\universidad\tareas e.d\tarea_2\musicfunctions.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"list.h"
+	"Map.h"
+
+1538512728 c:\users\rollaner\desktop\universidad\tareas e.d\tarea_2\map.h
+
+1571250553 source:c:\users\rollaner\desktop\universidad\tareas e.d\tarea_2\map.c
+	"Map.h"
+	<math.h>
+	<string.h>
+	<stdlib.h>
+	<stdint.h>
+	<assert.h>
+
+1571518296 source:c:\users\rollaner\desktop\universidad\tareas e.d\tarea_2\musicfunctions.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"musicfunctions.h"
+	"list.h"
+	"Map.h"
+

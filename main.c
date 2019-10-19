@@ -33,7 +33,7 @@ int main()
     printf("3) Agregar album \n");
     printf("4) Agregar cancion \n");
     printf("5) Eliminar canciones de un artista \n");
-    printf("6) Buscar cancion CSV \n");
+    printf("6) Buscar cancion \n");
     printf("7) Buscar canciones de un artista \n");
     printf("8) Buscar album \n");
     printf("9) Salir \n");
