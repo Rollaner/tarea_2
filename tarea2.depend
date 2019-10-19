@@ -39,3 +39,44 @@
 	"list.h"
 	"Map.h"
 
+1567652630 source:c:\users\estudiantes\desktop\tarea2\tarea2\list.c
+	"list.h"
+	<stdlib.h>
+	<assert.h>
+
+1567652630 c:\users\estudiantes\desktop\tarea2\tarea2\list.h
+
+1571253798 source:c:\users\estudiantes\desktop\tarea2\tarea2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"musicfunctions.h"
+	"Map.h"
+	"list.h"
+
+1571252827 c:\users\estudiantes\desktop\tarea2\tarea2\musicfunctions.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"list.h"
+	"Map.h"
+
+1538512728 c:\users\estudiantes\desktop\tarea2\tarea2\map.h
+
+1571250553 source:c:\users\estudiantes\desktop\tarea2\tarea2\map.c
+	"Map.h"
+	<math.h>
+	<string.h>
+	<stdlib.h>
+	<stdint.h>
+	<assert.h>
+
+1571254407 source:c:\users\estudiantes\desktop\tarea2\tarea2\musicfunctions.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"musicfunctions.h"
+	"list.h"
+	"Map.h"
+

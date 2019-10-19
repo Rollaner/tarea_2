@@ -10,7 +10,7 @@ char * _strdup (const char *s);
 
 const char *get_csv_field (char * tmp, int i);
 
-Map* import_musicCSV();                //lee datos de un archivo csv y los inserta al mapa songs
+void import_musicCSV(Map* songMap, Map* artistMap);                //lee datos de un archivo csv y los inserta al mapa songs
 
 void export_musicCSV(Map* songs);      //toma datos de mapa canciones y los ingresa a un archivo en formato csv
 
