@@ -4,6 +4,7 @@
 #include "musicfunctions.h"
 #include "Map.h"
 #include "list.h"
+#include "ctype.h"
 
 long long stringHash(const void * key) {
     long long hash = 5381;
@@ -24,6 +25,7 @@ int stringEqual(const void * key1, const void * key2) {
     return strcmp(A, B) == 0;
 }
 
+
 int main()
 {
     int op = 0;
@@ -37,13 +39,14 @@ int main()
     printf("7) Buscar canciones de un artista \n");
     printf("8) Buscar album \n");
     printf("9) Salir \n");
+    char* nombre = calloc(50, sizeof(char));
     while(op!=9){
         scanf("%d", &op);
         switch(op){
             case 1:printf("Leyendo archivo canciones.csv \n");
-                    Map* mapa_canciones = createMap(stringHash,stringEqual);
                     Map* mapa_artistas = createMap(stringHash,stringEqual);
-                    import_musicCSV(mapa_canciones,mapa_artistas);              //falta insercion de mapar artistas y albumes.
+                    Map* mapa_albumes = createMap(stringHash,stringEqual);
+                    mapa_albumes = import_musicCSV(mapa_albumes,mapa_artistas);              //falta insercion de mapar artistas y albumes.
                     break;
             case 2:printf("Exportando archivo canciones.csv \n");
 
@@ -55,14 +58,17 @@ int main()
             case 5:printf("Ingrese nombre artista \n");
                     break;
             case 6:printf("Ingrese nombre cancion \n");
-                    char* nombre = calloc(50, sizeof(char));
-                    fgets(nombre,50,stdin);             //para eliminar "\n del switch"
+                    fgets(nombre,10,stdin);             //para eliminar "\n del switch"
                     fgets(nombre,50,stdin);
                     if ((strlen(nombre) > 0) && (nombre[strlen (nombre) - 1] == '\n'))
                         nombre[strlen (nombre) - 1] = '\0';
-                    search_by_title(nombre, mapa_canciones);
+                    search_by_title(nombre, mapa_albumes);
                     break;
             case 7:printf("Ingrese nombre artista \n");
+                    fscanf(stdin,"%s",nombre);
+                    if ((strlen(nombre) > 0) && (nombre[strlen (nombre) - 1] == '\n'))
+                        nombre[strlen (nombre) - 1] = '\0';
+                    search_by_artist(nombre,mapa_artistas);
                     break;
             case 8:printf("Ingrese nombre album \n");
                     break;

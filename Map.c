@@ -28,6 +28,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <assert.h>
+#include <stdio.h>
 
 typedef struct pair Pair;
 

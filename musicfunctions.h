@@ -6,17 +6,33 @@
 #include "list.h"
 #include "Map.h"
 
+typedef struct song song;
+
+typedef struct album album;
+
+typedef struct artist artist;
+
 char * _strdup (const char *s);
 
 const char *get_csv_field (char * tmp, int i);
 
-void import_musicCSV(Map* songMap, Map* artistMap);                //lee datos de un archivo csv y los inserta al mapa songs
+//long long stringHash(const void * key);
+
+//int stringEqual(const void * key1, const void * key2);
+
+Map* import_musicCSV(Map* albumMap, Map* artistMap);                //lee datos de un archivo csv y los inserta al mapa songs
 
 void export_musicCSV(Map* songs);      //toma datos de mapa canciones y los ingresa a un archivo en formato csv
 
 void search_by_title(char* title, Map* songMap);
 
 void search_by_album(char* album, Map* albumMap);
+
+song* new_song(char* String);
+
+album* new_album(char* data);
+
+artist* new_artist(char* data);
 
 void add_song(char* title, char* artist, int length); // añade una cancion, se tiene que usar en conjunto a insert para añadirlo a los mapas
 
