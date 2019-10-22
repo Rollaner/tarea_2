@@ -6,15 +6,14 @@
 #include "list.h"
 #include "ctype.h"
 
-long long stringHash(const void * key) {
+/*long long stringHash(const void * key) {
     long long hash = 5381;
 
     const char * ptr;
 
     for (ptr = key; *ptr != '\0'; ptr++) {
-        hash = ((hash << 5) + hash) + tolower(*ptr); /* hash * 33 + c */
+        hash = ((hash << 5) + hash) + tolower(*ptr); // hash * 33 + c
     }
-
     return hash;
 }
 
@@ -23,7 +22,7 @@ int stringEqual(const void * key1, const void * key2) {
     const char * B = key2;
 
     return strcmp(A, B) == 0;
-}
+}*/
 
 
 int main()
@@ -44,12 +43,12 @@ int main()
         scanf("%d", &op);
         switch(op){
             case 1:printf("Leyendo archivo canciones.csv \n");
+                    Map* mapa_canciones = createMap(stringHash,stringEqual);
                     Map* mapa_artistas = createMap(stringHash,stringEqual);
                     Map* mapa_albumes = createMap(stringHash,stringEqual);
-                    mapa_albumes = import_musicCSV(mapa_albumes,mapa_artistas);              //falta insercion de mapar artistas y albumes.
+                    import_musicCSV(mapa_canciones,mapa_artistas,mapa_albumes);              //falta insercion de mapar artistas y albumes.
                     break;
             case 2:printf("Exportando archivo canciones.csv \n");
-
                     break;
             case 3:printf("Ingrese datos album \n");
                     break;
@@ -62,7 +61,7 @@ int main()
                     fgets(nombre,50,stdin);
                     if ((strlen(nombre) > 0) && (nombre[strlen (nombre) - 1] == '\n'))
                         nombre[strlen (nombre) - 1] = '\0';
-                    search_by_title(nombre, mapa_albumes);
+                    search_by_title(nombre, mapa_canciones);
                     break;
             case 7:printf("Ingrese nombre artista \n");
                     fscanf(stdin,"%s",nombre);
