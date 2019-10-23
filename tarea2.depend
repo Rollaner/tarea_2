@@ -87,7 +87,7 @@
 
 1567656230 c:\users\rollaner\desktop\universidad\tareas e.d\tarea_2\list.h
 
-1571785415 source:c:\users\rollaner\desktop\universidad\tareas e.d\tarea_2\main.c
+1571842693 source:c:\users\rollaner\desktop\universidad\tareas e.d\tarea_2\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -96,7 +96,7 @@
 	"list.h"
 	"ctype.h"
 
-1571785272 c:\users\rollaner\desktop\universidad\tareas e.d\tarea_2\musicfunctions.h
+1571842558 c:\users\rollaner\desktop\universidad\tareas e.d\tarea_2\musicfunctions.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -114,7 +114,7 @@
 	<assert.h>
 	<stdio.h>
 
-1571785458 source:c:\users\rollaner\desktop\universidad\tareas e.d\tarea_2\musicfunctions.c
+1571842596 source:c:\users\rollaner\desktop\universidad\tareas e.d\tarea_2\musicfunctions.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

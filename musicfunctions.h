@@ -30,7 +30,7 @@ void search_by_album(char* album, Map* albumMap);
 
 song* new_song(char* String);
 
-void add_song(char* title, char* artist, int length); // añade una cancion, se tiene que usar en conjunto a insert para añadirlo a los mapas
+void add_song(char* title, char* artist, char* length, char* songAlbum); // añade una cancion, se tiene que usar en conjunto a insert para añadirlo a los mapas
 
 void add_album(char* title, char* date, Map* albumMap); // crea un nuevo album
 
