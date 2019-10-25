@@ -30,12 +30,12 @@ void search_by_album(char* album, Map* albumMap);
 
 song* new_song(char* String);
 
-void add_song(char* title, char* artist, char* length, char* songAlbum); // añade una cancion, se tiene que usar en conjunto a insert para añadirlo a los mapas
+void add_song(char* title, char* artist, char* length, char* songAlbum, Map* songMap, Map* artistMap, Map* albumMap); // añade una cancion, se tiene que usar en conjunto a insert para añadirlo a los mapas
 
-void add_album(char* title, char* date, Map* albumMap); // crea un nuevo album
+void add_album(char* title, Map* albumMap, Map* songMap); // crea un nuevo album
 
-void search_by_artist(char* name, Map* artistMap);
+void search_by_artist(char* name, Map* artistMap, Map* songMap);
 
-void delete_artist(char* name, Map* artistMap);
+void delete_artist(char* name, Map* artistMap, Map* songMap, Map* albumMap);
 
 #endif // musicfunctions_h //

@@ -8,9 +8,9 @@
 
 struct song{
  char* name;
- char* artist;
+ char* artistName;
  char* length;
- char* album;
+ char* albumName;
 };
 
 struct album{
@@ -70,22 +70,21 @@ void import_musicCSV(Map* songMap, Map* artistMap, Map* albumMap){              
     while(fgets(String,100,fp)!= NULL){
         song* newSong = new_song(String);
         insertMap(songMap, newSong->name, newSong);
-        //printf("%ld \n", mapCount(songMap));
-        artist* currentArtist = searchMap(artistMap,newSong->artist);
+        artist* currentArtist = searchMap(artistMap,newSong->artistName);
         if(currentArtist == NULL){
             currentArtist = malloc(sizeof(artist));
             currentArtist->songlist = list_create_empty();
             list_push_front(currentArtist->songlist,newSong);
-            insertMap(artistMap,newSong->artist,currentArtist);
+            insertMap(artistMap,newSong->artistName,currentArtist);
         }else{
             list_push_front(currentArtist->songlist,newSong);
         }
-        album * currentAlbum = searchMap(albumMap, newSong->album);
+        album * currentAlbum = searchMap(albumMap, newSong->albumName);
         if(currentAlbum == NULL){
             currentAlbum = malloc(sizeof(album));
             currentAlbum->album_songs = createMap(stringHash,stringEqual);
             insertMap(currentAlbum->album_songs,newSong->name,newSong);
-            insertMap(albumMap,newSong->album,currentAlbum);
+            insertMap(albumMap,newSong->albumName,currentAlbum);
         }else{
             insertMap(currentAlbum->album_songs,newSong->name,newSong);
         }
@@ -97,9 +96,9 @@ void import_musicCSV(Map* songMap, Map* artistMap, Map* albumMap){              
 song* new_song(char* String){
         song* newSong = malloc(sizeof(song));
         newSong->name = get_csv_field(String,1);
-        newSong->artist = get_csv_field(String,2);
+        newSong->artistName = get_csv_field(String,2);
         newSong->length = get_csv_field(String,3);
-        newSong->album = get_csv_field(String,4);
+        newSong->albumName = get_csv_field(String,4);
         return newSong;
 }
 
@@ -115,7 +114,7 @@ void search_by_title(char* title, Map* songMap){
        printf ("Cancion ingresada no existe, por favor intente nuevamente \n");
        return;
     }
-    printf("%s %s %s %s \n",currentSong->name, currentSong->artist, currentSong->length, currentSong->album);
+    printf("%s %s %s %s \n",currentSong->name, currentSong->artistName, currentSong->length, currentSong->albumName);
 };
 
 void search_by_album(char* name, Map* albumMap){
@@ -127,98 +126,125 @@ void search_by_album(char* name, Map* albumMap){
     }
     else{
         song* currentSong = firstMap(currentAlbum->album_songs);
-        printf("%s \n", currentSong->album);
+        printf("%s \n", currentSong->albumName);
         while(currentSong != NULL){
-            printf("%s %s %s\n",currentSong->name, currentSong->artist, currentSong->length);
+            printf("%s %s %s\n",currentSong->name, currentSong->artistName, currentSong->length);
             currentSong = nextMap(currentAlbum->album_songs);
         }
     }
 };   //recorrer mapa album
 
-void add_song(char* title, char* artist, char* length, char* songAlbum){
-
-
-
+void add_song(char* title, char* songArtist, char* length, char* songAlbum, Map* songMap, Map* artistMap, Map* albumMap){
+    song* newSong = malloc(sizeof(song));
+        newSong->name = calloc(50,sizeof(char));
+        strcpy(newSong->name,title);
+        newSong->artistName = calloc(50,sizeof(char));
+        strcpy(newSong->artistName,songArtist);
+        newSong->length = calloc(6,sizeof(char));
+        strcpy(newSong->length,length);
+        newSong->albumName = calloc(50,sizeof(char));
+        strcpy(newSong->albumName,songAlbum);
+        insertMap(songMap,newSong->name,newSong);
+    album* addAlbum = searchMap(albumMap,songAlbum);
+        if(addAlbum == NULL){
+            addAlbum = malloc(sizeof(album));
+            addAlbum->album_songs = createMap(stringHash,stringEqual);
+            insertMap(addAlbum->album_songs,newSong->name,newSong);
+            insertMap(albumMap,newSong->albumName,addAlbum);
+        }
+        else{
+            insertMap(addAlbum->album_songs,newSong->name,newSong);
+        }
+    artist* addArtist = searchMap(artistMap, songArtist);
+        if(addArtist == NULL){
+            addArtist = malloc(sizeof(artist));
+            addArtist->songlist = list_create_empty();
+            list_push_front(addArtist->songlist,newSong);
+            insertMap(artistMap,newSong->artistName,addArtist);
+        }
+        else{
+            list_push_front(addArtist->songlist,newSong);
+        }
+        return;
 };
 
-void add_album(char* title, char* date, Map* albumMap){
-    album* currentAlbum = searchMap(albumMap,title);
+void add_album(char* name, Map* albumMap, Map* songMap){
+    album* currentAlbum = searchMap(albumMap,name);
     char Answer;
     if (currentAlbum != NULL){
-        printf("Album ya existe, desea añadir mas canciones? Y/N \n");
+        printf("Album ya existe, desea agregar mas canciones? Y/N \n");
         while(Answer != 'n'){
             scanf("%c", &Answer);
             if(isupper(Answer)){
                 Answer = tolower(Answer);
             }
             if(Answer == 'y'){
-                printf("Ingrese datos cancion: \n");
-                    char* songTitle = calloc(30,sizeof(char));
-                    char* artist = calloc(30,sizeof(char));
-                    char* length = calloc(6,sizeof(char)); //para eliminar "\n del switch"
-                    fgets(songTitle,30,stdin);
-                    fgets(artist,30,stdin);
-                    fgets(length,6,stdin);
-                    if ((strlen(songTitle) > 0) && (songTitle[strlen (songTitle) - 1] == '\n'))
-                        songTitle[strlen (songTitle) - 1] = '\0';
-                    if ((strlen(artist) > 0) && (artist[strlen (artist) - 1] == '\n'))
-                        artist[strlen (artist) - 1] = '\0';
-                    if ((strlen(length) > 0) && (length[strlen (length) - 1] == '\n'))
-                        length[strlen (length) - 1] = '\0';
-                add_song(songTitle, artist, length, title);
-                printf("Desea añadir otra cancion? Y/N \n");
+                printf("Ingrese nombre cancion: \n");
+                    char* title = calloc(30,sizeof(char));
+                    fgets(title,10,stdin);
+                    fgets(title,30,stdin);
+                    if ((strlen(title) > 0) && (title[strlen (title) - 1] == '\n'))
+                        title[strlen (title) - 1] = '\0';
+                    song* songAdd = searchMap(songMap,title);
+                    if(songAdd == NULL){
+                        printf("Cancion no esta presente en el archivo, porfavor ingrese su cancion e intente nuevamente \n");
+                        printf("Desea agregar otra cancion? Y/N \n");
+                        continue;
+                    }
+                    strcpy(songAdd->albumName, name);
+                    insertMap(currentAlbum->album_songs,songAdd->name,songAdd);
+                printf("Desea agregar otra cancion? Y/N \n");
             }
         }
     }else{
         currentAlbum = malloc(sizeof(album));
-        strcpy(currentAlbum->date,date);
+        //strcpy(currentAlbum->date,date);
         currentAlbum->album_songs = createMap(stringHash,stringEqual);
-        insertMap(albumMap,title,currentAlbum);
-        printf("Desea añadir canciones al album creado? Y/N \n");
+        insertMap(albumMap,name,currentAlbum);
+        printf("Desea agregar canciones al album creado? Y/N \n");
         while(Answer != 'n'){
             scanf("%c", &Answer);
             if(isupper(Answer)){
                 Answer = tolower(Answer);
             }
             if(Answer == 'y'){
-                printf("Ingrese datos cancion: \n");
-                char* songTitle = calloc(30,sizeof(char));
-                char* artist = calloc(30,sizeof(char));
-                char* length = calloc(6,sizeof(char)); //para eliminar "\n del switch"
-                fgets(songTitle,30,stdin);
-                fgets(artist,30,stdin);
-                fgets(length,6,stdin);
-                if ((strlen(songTitle) > 0) && (songTitle[strlen (songTitle) - 1] == '\n'))
-                    songTitle[strlen (songTitle) - 1] = '\0';
-                if ((strlen(artist) > 0) && (artist[strlen (artist) - 1] == '\n'))
-                    artist[strlen (artist) - 1] = '\0';
-                if ((strlen(length) > 0) && (length[strlen (length) - 1] == '\n'))
-                    length[strlen (length) - 1] = '\0';
-                add_song(songTitle, artist, length, title);
-                printf("Desea añadir otra cancion? Y/N \n");
+                printf("Ingrese nombre cancion: \n");
+                    char* songTitle = calloc(30,sizeof(char));
+                    fgets(songTitle,10,stdin);
+                    fgets(songTitle,30,stdin);
+                    if ((strlen(songTitle) > 0) && (songTitle[strlen (songTitle) - 1] == '\n'))
+                        songTitle[strlen (songTitle) - 1] = '\0';
+                    song* songAdd = searchMap(songMap,songTitle);
+                    if(songAdd == NULL){
+                        printf("Cancion no esta presente en el archivo, porfavor ingrese su cancion e intente nuevamente \n");
+                        printf("Desea agregar otra cancion? Y/N \n");
+                        continue;
+                    }
+                    songAdd->albumName = name;
+                    insertMap(currentAlbum->album_songs,songAdd->name,songAdd);
+                printf("Desea agregar otra cancion? Y/N \n");
             }
         }
     }
     return;
 }; // crea un nuevo album
 
-void search_by_artist(char* name, Map* artistMap){
-    artist* currentArtist = searchMap(artistMap,name);
+void search_by_artist(char* nameArtist, Map* artistMap, Map* songMap){
+    artist* currentArtist = searchMap(artistMap,nameArtist);
     if (currentArtist == NULL){
         printf("Artista no encontrado, intente nuevamente \n");
         return;
     }
     song* currentSong = list_first(currentArtist->songlist);
-    printf("%s \n", currentSong->artist);
     while(currentSong != NULL){
         printf("%s ", currentSong->name);
-        printf("%s  %s \n", currentSong->album, currentSong->length);
+        printf("%s  %s \n", currentSong->albumName, currentSong->length);
         currentSong = list_next(currentArtist->songlist);
     }
     return;
 };
 
-void delete_artist(char* name, Map* artistMap){
+void delete_artist(char* name, Map* artistMap, Map* songMap, Map* albumMap){
     artist* currentArtist = searchMap(artistMap,name);
     if(currentArtist == NULL){
      printf("Artista no existe, revise datos ingresados \n");
