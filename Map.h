@@ -130,6 +130,9 @@ void * searchMap(Map * map, const void * key);
  */
 void * firstMap(Map * map);
 
+
+void * firstKeyMap(Map * map);
+
 /**
  Retorna el siguiente elemento no nulo del Map.
 
@@ -139,6 +142,8 @@ void * firstMap(Map * map);
  @return Puntero al siguiente elemento encontrado del Map.
  */
 void * nextMap(Map * map);
+
+void * nextKeyMap(Map * map);
 
 /**
  Elimina todos los elementos del Map, pero sin liberar la memoria de los datos contentidos.

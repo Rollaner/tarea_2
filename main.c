@@ -39,16 +39,19 @@ int main()
     printf("8) Buscar album \n");
     printf("9) Salir \n");
     char* nombre = calloc(50, sizeof(char));
+    Map* mapa_canciones = createMap(stringHash,stringEqual);
+    Map* mapa_artistas = createMap(stringHash,stringEqual);
+    Map* mapa_albumes = createMap(stringHash,stringEqual);
     while(op!=9){
         scanf("%d", &op);
         switch(op){
             case 1:printf("Leyendo archivo canciones.csv \n");
-                    Map* mapa_canciones = createMap(stringHash,stringEqual);
-                    Map* mapa_artistas = createMap(stringHash,stringEqual);
-                    Map* mapa_albumes = createMap(stringHash,stringEqual);
-                    import_musicCSV(mapa_canciones,mapa_artistas,mapa_albumes);              //falta insercion de mapar artistas y albumes.
+                    import_musicCSV(mapa_canciones,mapa_artistas,mapa_albumes);
+                    printf("Operacion Terminada \n");              //falta insercion de mapar artistas y albumes.
                     break;
-            case 2:printf("Exportando archivo canciones.csv \n");
+            case 2:printf("Exportando  a archivo cancionesOUTPUT.csv \n");
+                    export_musicCSV(mapa_canciones);
+                    printf("Operacion Completada \n");
                     break;
             case 3:printf("Ingrese datos album \n");
                     nombre = calloc(50, sizeof(char));
@@ -76,6 +79,7 @@ int main()
                     if ((strlen(duracion) > 0) && (duracion[strlen (duracion) - 1] == '\n'))
                         duracion[strlen (duracion) - 1] = '\0';
                     add_song(nombre,artista,duracion,"-",mapa_canciones, mapa_artistas, mapa_albumes);
+                    printf("Cancion ingresada a memoria \n");
                     break;
             case 5:printf("Ingrese nombre artista \n");
                     fgets(nombre,10,stdin);             //para eliminar "\n del switch"
@@ -83,6 +87,7 @@ int main()
                     if ((strlen(nombre) > 0) && (nombre[strlen (nombre) - 1] == '\n'))
                         nombre[strlen (nombre) - 1] = '\0';
                     delete_artist(nombre,mapa_artistas,mapa_canciones,mapa_albumes);
+                    printf("Artista ""%s"" eliminado \n", nombre);
                     break;
             case 6:printf("Ingrese nombre cancion \n");
                     fgets(nombre,10,stdin);             //para eliminar "\n del switch"
@@ -96,7 +101,7 @@ int main()
                     fgets(nombre,50,stdin);
                     if ((strlen(nombre) > 0) && (nombre[strlen (nombre) - 1] == '\n'))
                         nombre[strlen (nombre) - 1] = '\0';
-                    search_by_artist(nombre,mapa_artistas,mapa_canciones);
+                    search_by_artist(nombre,mapa_artistas);
                     break;
             case 8:printf("Ingrese nombre album \n");
                     fgets(nombre,10,stdin);             //para eliminar "\n del switch"
@@ -105,7 +110,11 @@ int main()
                         nombre[strlen (nombre) - 1] = '\0';
                     search_by_album(nombre,mapa_albumes);
                     break;
-            case 9: break;
+            case 9: printf("Para guardar sus cambios recuerde exportar a CSV \n");
+                    break;
+
+            default: printf("Opcion no valida, intente nuevamentente \n");
+                     continue;
         }
     }
     return 0;

@@ -14,7 +14,7 @@ struct song{
 };
 
 struct album{
-    char* date;
+    char* name;
     Map* album_songs;
 };
 
@@ -82,6 +82,8 @@ void import_musicCSV(Map* songMap, Map* artistMap, Map* albumMap){              
         album * currentAlbum = searchMap(albumMap, newSong->albumName);
         if(currentAlbum == NULL){
             currentAlbum = malloc(sizeof(album));
+            currentAlbum->name = calloc(30, sizeof(char));
+            strcpy(currentAlbum->name,newSong->albumName);
             currentAlbum->album_songs = createMap(stringHash,stringEqual);
             insertMap(currentAlbum->album_songs,newSong->name,newSong);
             insertMap(albumMap,newSong->albumName,currentAlbum);
@@ -91,21 +93,30 @@ void import_musicCSV(Map* songMap, Map* artistMap, Map* albumMap){              
     }
     fclose(fp);
     return;
-};
+}
 
 song* new_song(char* String){
         song* newSong = malloc(sizeof(song));
-        newSong->name = get_csv_field(String,1);
-        newSong->artistName = get_csv_field(String,2);
-        newSong->length = get_csv_field(String,3);
-        newSong->albumName = get_csv_field(String,4);
+        newSong->name = calloc(50,sizeof(char));
+        newSong->albumName = calloc(50,sizeof(char));
+        newSong->artistName = calloc(50,sizeof(char));
+        newSong->length = calloc(6,sizeof(char));
+        strcpy(newSong->name,get_csv_field(String,1));
+        strcpy(newSong->artistName,get_csv_field(String,2));
+        strcpy(newSong->length,get_csv_field(String,3));
+        strcpy(newSong->albumName,get_csv_field(String,4));
         return newSong;
 }
 
 void export_musicCSV(Map* songs){
-
-
-
+    song* currentSong = firstKeyMap(songs);
+    FILE* fp = fopen("mdata\\cancionesOUTPUT.csv","w");
+    fprintf(fp,"Nombre,Artista,Duracion,Album\n");
+    while(currentSong != NULL){
+     fprintf(fp,"%s,%s,%s,%s\n",currentSong->name,currentSong->artistName,currentSong->length,currentSong->albumName);
+     currentSong = nextKeyMap(songs);
+    }
+    fclose(fp);
 };      //toma datos de mapa canciones y los ingresa a un archivo en formato csv
 
 void search_by_title(char* title, Map* songMap){
@@ -115,7 +126,7 @@ void search_by_title(char* title, Map* songMap){
        return;
     }
     printf("%s %s %s %s \n",currentSong->name, currentSong->artistName, currentSong->length, currentSong->albumName);
-};
+}
 
 void search_by_album(char* name, Map* albumMap){
     album* currentAlbum;
@@ -132,7 +143,7 @@ void search_by_album(char* name, Map* albumMap){
             currentSong = nextMap(currentAlbum->album_songs);
         }
     }
-};   //recorrer mapa album
+}   //recorrer mapa album
 
 void add_song(char* title, char* songArtist, char* length, char* songAlbum, Map* songMap, Map* artistMap, Map* albumMap){
     song* newSong = malloc(sizeof(song));
@@ -166,7 +177,7 @@ void add_song(char* title, char* songArtist, char* length, char* songAlbum, Map*
             list_push_front(addArtist->songlist,newSong);
         }
         return;
-};
+}
 
 void add_album(char* name, Map* albumMap, Map* songMap){
     album* currentAlbum = searchMap(albumMap,name);
@@ -198,9 +209,9 @@ void add_album(char* name, Map* albumMap, Map* songMap){
         }
     }else{
         currentAlbum = malloc(sizeof(album));
-        //strcpy(currentAlbum->date,date);
+        strcpy(currentAlbum->name, name);
         currentAlbum->album_songs = createMap(stringHash,stringEqual);
-        insertMap(albumMap,name,currentAlbum);
+        insertMap(albumMap,currentAlbum->name,currentAlbum);
         printf("Desea agregar canciones al album creado? Y/N \n");
         while(Answer != 'n'){
             scanf("%c", &Answer);
@@ -220,16 +231,16 @@ void add_album(char* name, Map* albumMap, Map* songMap){
                         printf("Desea agregar otra cancion? Y/N \n");
                         continue;
                     }
-                    songAdd->albumName = name;
+                    songAdd->albumName = currentAlbum->name;
                     insertMap(currentAlbum->album_songs,songAdd->name,songAdd);
                 printf("Desea agregar otra cancion? Y/N \n");
             }
         }
     }
     return;
-}; // crea un nuevo album
+} // crea un nuevo album
 
-void search_by_artist(char* nameArtist, Map* artistMap, Map* songMap){
+void search_by_artist(char* nameArtist, Map* artistMap){
     artist* currentArtist = searchMap(artistMap,nameArtist);
     if (currentArtist == NULL){
         printf("Artista no encontrado, intente nuevamente \n");
@@ -242,7 +253,7 @@ void search_by_artist(char* nameArtist, Map* artistMap, Map* songMap){
         currentSong = list_next(currentArtist->songlist);
     }
     return;
-};
+}
 
 void delete_artist(char* name, Map* artistMap, Map* songMap, Map* albumMap){
     artist* currentArtist = searchMap(artistMap,name);
@@ -250,6 +261,17 @@ void delete_artist(char* name, Map* artistMap, Map* songMap, Map* albumMap){
      printf("Artista no existe, revise datos ingresados \n");
     }
     else{
-
+        song* currentSong = list_pop_front(currentArtist->songlist);
+        album* currentAlbum = searchMap(albumMap, currentSong->albumName);
+        while  (currentSong != NULL){
+                eraseKeyMap(currentAlbum->album_songs,currentSong->name);
+                eraseKeyMap(songMap,currentSong->name);
+                if(strcmp(currentSong->albumName,currentAlbum->name)!= 0)
+                    eraseKeyMap(albumMap,currentAlbum->name);
+                currentSong = list_pop_front(currentArtist->songlist);
+                }
+        eraseKeyMap(albumMap,currentAlbum->name);
+        eraseKeyMap(artistMap,name);
+        free(currentArtist);
     }
-};             //borra canciones primero, despues al artista
+}             //borra canciones primero, despues al artista

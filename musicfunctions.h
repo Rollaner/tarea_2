@@ -34,7 +34,7 @@ void add_song(char* title, char* artist, char* length, char* songAlbum, Map* son
 
 void add_album(char* title, Map* albumMap, Map* songMap); // crea un nuevo album
 
-void search_by_artist(char* name, Map* artistMap, Map* songMap);
+void search_by_artist(char* name, Map* artistMap);
 
 void delete_artist(char* name, Map* artistMap, Map* songMap, Map* albumMap);
 

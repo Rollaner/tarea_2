@@ -2,40 +2,16 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="Map.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5700" topLine="169" />
-		</Cursor>
-		<Folding>
-			<Collapse line="49" />
-		</Folding>
-	</File>
-	<File name="list.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3816" topLine="143" />
-		</Cursor>
-	</File>
-	<File name="Map.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3198" topLine="105" />
-		</Cursor>
-	</File>
 	<File name="list.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1269" topLine="44" />
+			<Cursor1 position="1269" topLine="31" />
 		</Cursor>
 	</File>
-	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="musicfunctions.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3339" topLine="61" />
-		</Cursor>
-	</File>
-	<File name="musicfunctions.c" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="8933" topLine="190" />
+			<Cursor1 position="6827" topLine="156" />
 		</Cursor>
 		<Folding>
-			<Collapse line="15" />
 			<Collapse line="20" />
 			<Collapse line="24" />
 			<Collapse line="34" />
@@ -43,9 +19,42 @@
 			<Collapse line="58" />
 		</Folding>
 	</File>
-	<File name="musicfunctions.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="list.c" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1184" topLine="19" />
+			<Cursor1 position="7201" topLine="248" />
+		</Cursor>
+		<Folding>
+			<Collapse line="30" />
+			<Collapse line="41" />
+			<Collapse line="58" />
+			<Collapse line="71" />
+			<Collapse line="89" />
+			<Collapse line="99" />
+			<Collapse line="106" />
+		</Folding>
+	</File>
+	<File name="Map.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7097" topLine="224" />
+		</Cursor>
+		<Folding>
+			<Collapse line="49" />
+			<Collapse line="150" />
+		</Folding>
+	</File>
+	<File name="Map.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3633" topLine="134" />
+		</Cursor>
+	</File>
+	<File name="musicfunctions.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1170" topLine="19" />
+		</Cursor>
+	</File>
+	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="636" topLine="27" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
