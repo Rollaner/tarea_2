@@ -30,7 +30,7 @@ int main()
     int op = 0;
     printf("Ingrese numero de la operacion deseada: \n");
     printf("1) Importar musica desde archivo CSV \n");
-    printf("2) Exportar musica desde archivo CSV \n");
+    printf("2) Exportar musica a archivo CSV \n");
     printf("3) Agregar album \n");
     printf("4) Agregar cancion \n");
     printf("5) Eliminar canciones de un artista \n");

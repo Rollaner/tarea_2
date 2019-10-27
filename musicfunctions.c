@@ -264,14 +264,14 @@ void delete_artist(char* name, Map* artistMap, Map* songMap, Map* albumMap){
         song* currentSong = list_pop_front(currentArtist->songlist);
         album* currentAlbum = searchMap(albumMap, currentSong->albumName);
         while  (currentSong != NULL){
-                eraseKeyMap(currentAlbum->album_songs,currentSong->name);
-                eraseKeyMap(songMap,currentSong->name);
+                free(eraseKeyMap(currentAlbum->album_songs,currentSong->name));
+                free(eraseKeyMap(songMap,currentSong->name));
                 if(strcmp(currentSong->albumName,currentAlbum->name)!= 0)
-                    eraseKeyMap(albumMap,currentAlbum->name);
+                    free(eraseKeyMap(albumMap,currentAlbum->name));
                 currentSong = list_pop_front(currentArtist->songlist);
                 }
-        eraseKeyMap(albumMap,currentAlbum->name);
-        eraseKeyMap(artistMap,name);
+        free(eraseKeyMap(albumMap,currentAlbum->name));
+        free(eraseKeyMap(artistMap,name));
         free(currentArtist);
     }
 }             //borra canciones primero, despues al artista
