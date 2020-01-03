@@ -259,18 +259,36 @@ void delete_artist(char* name, Map* artistMap, Map* songMap, Map* albumMap){
     artist* currentArtist = searchMap(artistMap,name);
     if(currentArtist == NULL){
      printf("Artista no existe, revise datos ingresados \n");
+     return;
     }
     else{
         song* currentSong = list_pop_front(currentArtist->songlist);
         album* currentAlbum = searchMap(albumMap, currentSong->albumName);
+        song* albumCheck = currentSong;
+        album* newAlbum = malloc(sizeof(album));
+        newAlbum->name = calloc(50,sizeof(char));
+        newAlbum->album_songs = NULL;
         while  (currentSong != NULL){
-                free(eraseKeyMap(currentAlbum->album_songs,currentSong->name));
                 free(eraseKeyMap(songMap,currentSong->name));
-                if(strcmp(currentSong->albumName,currentAlbum->name)!= 0)
-                    free(eraseKeyMap(albumMap,currentAlbum->name));
-                currentSong = list_pop_front(currentArtist->songlist);
+                if(currentAlbum != NULL){
+                    albumCheck = firstMap(currentAlbum->album_songs);
+                    while(albumCheck != NULL){
+                        if(strcmp(albumCheck->artistName,name)!=0){
+                            if(newAlbum->album_songs == NULL){
+                                newAlbum->album_songs = createMap(stringHash,stringEqual);
+                                strcpy(newAlbum->name,currentSong->albumName);
+                            }
+                            if(currentAlbum == NULL) break;
+                            insertMap(newAlbum->album_songs,albumCheck->name,albumCheck);
+                        }
+                        albumCheck = nextMap(currentAlbum->album_songs);
+                    }
                 }
-        free(eraseKeyMap(albumMap,currentAlbum->name));
+                currentAlbum = NULL;
+                free(eraseKeyMap(albumMap,currentSong->albumName));
+                currentSong = list_pop_front(currentArtist->songlist);
+                currentAlbum = searchMap(albumMap, currentSong->albumName);
+        }
         free(eraseKeyMap(artistMap,name));
         free(currentArtist);
     }
